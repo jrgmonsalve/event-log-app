@@ -1,0 +1,75 @@
+<div class="mb-4 flex space-x-4">
+  <div>
+    <label for="typeFilter" class="block text-sm font-medium text-gray-700">Filtrar por Tipo</label>
+    <select
+      id="typeFilter"
+      [(ngModel)]="typeFilter"
+      name="typeFilter"
+      class="mt-1 block w-full px-3 py-2 border border-gray-300 rounded-md shadow-sm focus:outline-none focus:ring-blue-500 focus:border-blue-500 sm:text-sm"
+      (ngModelChange)="applyFilters()"
+    >
+      <option value="">Todos</option>
+      <option value="API">API</option>
+      <option value="FORM">FORM</option>
+    </select>
+  </div>
+  <div>
+    <label for="dateFrom" class="block text-sm font-medium text-gray-700">Desde</label>
+    <input
+      type="date"
+      id="dateFrom"
+      [(ngModel)]="dateFrom"
+      name="dateFrom"
+      class="mt-1 block w-full px-3 py-2 border border-gray-300 rounded-md shadow-sm focus:outline-none focus:ring-blue-500 focus:border-blue-500 sm:text-sm"
+      (ngModelChange)="applyFilters()"
+    />
+  </div>
+  <div>
+    <label for="dateTo" class="block text-sm font-medium text-gray-700">Hasta</label>
+    <input
+      type="date"
+      id="dateTo"
+      [(ngModel)]="dateTo"
+      name="dateTo"
+      class="mt-1 block w-full px-3 py-2 border border-gray-300 rounded-md shadow-sm focus:outline-none focus:ring-blue-500 focus:border-blue-500 sm:text-sm"
+      (ngModelChange)="applyFilters()"
+    />
+  </div>
+</div>
+
+<div class="mt-8">
+  <table class="min-w-full bg-white">
+    <thead>
+      <tr>
+        <th class="py-2 text-left text-sm font-medium text-gray-500">Fecha</th>
+        <th class="py-2 text-left text-sm font-medium text-gray-500">Descripción</th>
+        <th class="py-2 text-left text-sm font-medium text-gray-500">Tipo de Evento</th>
+      </tr>
+    </thead>
+    <tbody>
+      <tr *ngFor="let event of pagedEvents">
+        <td class="py-2">{{ event.date | date: 'short' }}</td>
+        <td class="py-2">{{ event.description }}</td>
+        <td class="py-2">{{ event.type }}</td>
+      </tr>
+    </tbody>
+  </table>
+</div>
+
+<div class="mt-4 flex justify-end space-x-2">
+  <button
+    (click)="previousPage()"
+    [disabled]="currentPage === 1"
+    class="px-4 py-2 bg-gray-300 text-gray-700 rounded disabled:opacity-50"
+  >
+    Anterior
+  </button>
+  <span class="py-2">Página {{ currentPage }} de {{ totalPages }}</span>
+  <button
+    (click)="nextPage()"
+    [disabled]="currentPage === totalPages"
+    class="px-4 py-2 bg-gray-300 text-gray-700 rounded disabled:opacity-50"
+  >
+    Siguiente
+  </button>
+</div>

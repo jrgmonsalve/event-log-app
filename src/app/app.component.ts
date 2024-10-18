@@ -1,13 +1,11 @@
 import { Component } from '@angular/core';
-import { RouterOutlet } from '@angular/router';
+import { EventFormComponent } from './event-form/event-form.component';
+import { EventTableComponent } from './event-table/event-table.component';
 
 @Component({
   selector: 'app-root',
   standalone: true,
-  imports: [RouterOutlet],
+  imports: [EventFormComponent, EventTableComponent],
   templateUrl: './app.component.html',
-  styleUrl: './app.component.css'
 })
-export class AppComponent {
-  title = 'event-log-app';
-}
+export class AppComponent {}
